@@ -3,5 +3,7 @@ package com.rga.uploader.ui;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
 
-@DefaultUrl("http://www.google.co.uk")
-public class GoogleSearchPage extends PageObject {}
+@DefaultUrl("http://localhost:3010/bin/dev/")
+public class UploaderUI extends PageObject {
+
+}
