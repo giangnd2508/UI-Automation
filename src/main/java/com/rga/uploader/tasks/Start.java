@@ -2,32 +2,25 @@ package com.rga.uploader.tasks;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-import net.serenitybdd.core.steps.Instrumented;
+import com.rga.uploader.ui.UploaderUI;
 
-public class Start {
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Open;
+import net.thucydides.core.annotations.Step;
 
-	public static StartBeforeLogin theUploaderUIBeforeLogin() {
-		return instrumented(StartBeforeLogin.class);
+public class Start implements Task{
+	
+	UploaderUI theUploaderUI;
+
+	@Step("{0} open the page Started")
+	@Override
+	public <T extends Actor> void performAs(T actor) {
+		actor.attemptsTo(Open.browserOn(theUploaderUI));
 	}
 
-	public static Login theHomePageWithRoleClient() {
-		return Instrumented.instanceOf(Login.class).withProperties("jame",
-				"12345678");
-	}
-
-	public static Login theHomePageWithRoleTU() {
-		return Instrumented.instanceOf(Login.class).withProperties("harry",
-				"12345678");
-	}
-
-	public static Login theHomePageWithRoleGRDA() {
-		return Instrumented.instanceOf(Login.class).withProperties("anna",
-				"12345678");
-	}
-
-	public static Login theHomePageWithRoleRGA() {
-		return Instrumented.instanceOf(Login.class).withProperties("john",
-				"12345678");
+	public static Start theApplication() {
+		return instrumented(Start.class);
 	}
 
 

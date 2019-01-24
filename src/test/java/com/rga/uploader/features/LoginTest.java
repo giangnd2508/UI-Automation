@@ -31,13 +31,8 @@ public class LoginTest {
 
 	@Test
 	public void should_login_success() {
-		givenThat(jame).wasAbleTo(Start.theUploaderUIBeforeLogin());
-		when(jame).attemptsTo(Login.withAccount("jame", "12345678"));
+		givenThat(jame).wasAbleTo(Start.theApplication());
+		when(jame).attemptsTo(Login.withClientAccount());
 	}
 	
-	@Test
-	public void get_into_home_page() {
-		givenThat(jame).wasAbleTo(Start.theHomePageWithRoleClient());
-	}
-
 }
