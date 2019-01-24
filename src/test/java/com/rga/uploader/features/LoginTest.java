@@ -32,7 +32,6 @@ public class LoginTest {
 	@Test
 	public void should_login_success() {
 		givenThat(jame).wasAbleTo(Start.theApplication());
-		when(jame).attemptsTo(Login.withClientAccount());
+		when(jame).attemptsTo(Login.withGRDAAccount());
 	}
-	
 }

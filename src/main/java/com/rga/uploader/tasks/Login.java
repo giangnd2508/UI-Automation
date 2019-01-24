@@ -23,12 +23,11 @@ public class Login implements Task {
 	@Step("{0} login with username '#username' and password '#password'")
 	@Override
 	public <T extends Actor> void performAs(T actor) {
-		actor.attemptsTo(Start.theApplication(),
+		actor.attemptsTo(
 				Click.on(WelcomePage.LOGIN_BTN),
 				Enter.theValue(username).into(LoginPage.USERNAME_FIELD),
 				Enter.theValue(password).into(LoginPage.PASSWORD_FIELD),
 				Click.on(LoginPage.LOGIN_BUTTON));
-
 	}
 
 	public static Login withClientAccount() {
