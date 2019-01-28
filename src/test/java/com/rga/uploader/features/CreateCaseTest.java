@@ -4,7 +4,8 @@ import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.GivenWhenThen.then;
 import static net.serenitybdd.screenplay.GivenWhenThen.when;
-import static org.hamcrest.Matchers.hasItem;
+import static net.serenitybdd.screenplay.matchers.ConsequenceMatchers.displays;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.rga.uploader.model.NewCase;
+import com.rga.uploader.questions.FirstCase;
 import com.rga.uploader.tasks.Create;
 import com.rga.uploader.tasks.Login;
 import com.rga.uploader.tasks.Start;
@@ -24,9 +26,7 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
 
 @RunWith(SerenityRunner.class)
-@WithTags({
-    @WithTag("feature:smoke"),
-})
+@WithTags({ @WithTag("feature:smoke"), })
 public class CreateCaseTest {
 
 	@Managed
@@ -45,24 +45,43 @@ public class CreateCaseTest {
 		// Data test
 		String description = "new customer";
 		String fileUpload = "pii-policy.csv";
+		String status = "PII EXTRACTING";
 
 		NewCase newCase = new NewCase(description, fileUpload);
-
-		/*
-		 * Test case: create a new case success with description "new customer"
-		 * and fileUpload "pii-policy.csv"
-		 */
+		// =========================================================
 
 		givenThat(jame).wasAbleTo(Start.theApplication());
 
-		when(jame).attemptsTo(
-				Login.withClientAccount(), 
-				Create.the(newCase));
+		when(jame).attemptsTo(Login.withClientAccount(), Create.the(newCase));
 
-		/*
-		 * then(jame).should( seeThat(CaseListDescription.items,
-		 * hasItem(description)));
-		 */
+		then(jame).should(
+				seeThat(FirstCase.information(),
+						displays("description", equalTo(description))),
+				seeThat(FirstCase.information(),
+						displays("status", equalTo(status))));
+
+	}
+
+	@Test
+	public void create_case_without_description() {
+
+		// Data test
+		String description = "";
+		String fileUpload = "pii-policy.csv";
+		String status = "PII EXTRACTING";
+
+		NewCase newCase = new NewCase(description, fileUpload);
+		// =========================================================
+
+		givenThat(jame).wasAbleTo(Start.theApplication());
+
+		when(jame).attemptsTo(Login.withClientAccount(), Create.the(newCase));
+
+		then(jame).should(
+				seeThat(FirstCase.information(),
+						displays("description", equalTo(description))),
+				seeThat(FirstCase.information(),
+						displays("status", equalTo(status))));
 	}
 
 }

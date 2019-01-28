@@ -5,34 +5,37 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import com.rga.uploader.model.NewCase;
 import com.rga.uploader.ui.CreateCasePage;
 import com.rga.uploader.ui.HomePage;
+import com.rga.uploader.ui.UploaderUI;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Open;
 import net.thucydides.core.annotations.Step;
 
 public class Create implements Task {
 
-	private String description;
-	private String fileUpload;
 	NewCase newCase;
 
 	public Create(NewCase newCase) {
 		this.newCase = newCase;
 	}
 
-	@Step("{0} creates a new case with description '#description' and password '#fileUpload'")
+	UploaderUI uploaderUI;
+
+	@Step("{0} creates a new case")
 	@Override
 	public <T extends Actor> void performAs(T actor) {
 
-		description = newCase.getDescription();
-		fileUpload = newCase.getFileUpload();
+		String description = newCase.getDescription();
+		String fileUpload = newCase.getFileUpload();
 
 		actor.attemptsTo(Click.on(HomePage.CREATE_CASE_BUTTON),
 				Enter.theValue(description).into(CreateCasePage.DESCRIPTION),
 				Enter.keyValues(fileUpload).into(CreateCasePage.FILE_UPLOAD),
-				Click.on(CreateCasePage.CREATE_BUTTON));
+				Click.on(CreateCasePage.CREATE_BUTTON),
+				Open.browserOn(uploaderUI));
 
 	}
 
