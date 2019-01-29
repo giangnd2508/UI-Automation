@@ -11,7 +11,7 @@ public class Refresh implements Interaction, IsSilent {
         BrowseTheWeb.as(actor).getDriver().navigate().refresh();
     }
 
-    public static Refresh theBrowserSession() {
+    public static Refresh thePage() {
         return new Refresh();
     }
 }
