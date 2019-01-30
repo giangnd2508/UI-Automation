@@ -10,6 +10,8 @@ public class NewCase {
 			+ "src" + File.separator + "test" + File.separator + "resources"
 			+ File.separator;
 
+	private String color;
+
 	public NewCase(String description, String fileUpload) {
 		this.description = description;
 		this.fileUpload = path + fileUpload;
@@ -29,6 +31,14 @@ public class NewCase {
 
 	public void setFileUpload(String fileUpload) {
 		this.fileUpload = fileUpload;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 }

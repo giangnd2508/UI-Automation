@@ -34,9 +34,7 @@ public class Create implements Task {
 		actor.attemptsTo(Click.on(HomePage.CREATE_CASE_BUTTON),
 				Enter.theValue(description).into(CreateCasePage.DESCRIPTION),
 				Enter.keyValues(fileUpload).into(CreateCasePage.FILE_UPLOAD),
-				Click.on(CreateCasePage.CREATE_BUTTON),
-				Open.browserOn(uploaderUI));
-
+				Click.on(CreateCasePage.CREATE_BUTTON));
 	}
 
 	public static Create the(NewCase newCase) {

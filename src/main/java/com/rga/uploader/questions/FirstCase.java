@@ -20,7 +20,7 @@ public class FirstCase implements Question<FisrtCaseInformation> {
 			description = Text.of(CaselistComponent.FIST_ITEM_DESCRIPTION)
 					.viewedBy(actor).asString();
 		} catch (Exception e) {
-			
+
 		}
 
 		String status = Text.of(CaselistComponent.FIST_ITEM_STATUS)
